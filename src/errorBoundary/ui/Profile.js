@@ -10,7 +10,7 @@ import {
 } from '../AppError';
 
 import {
-  useErrorHandler
+  useError
 } from '../errorContext';
 
 export function Profile() {
@@ -19,7 +19,7 @@ export function Profile() {
   const {
     capture,
     trace
-  } = useErrorHandler();
+  } = useError();
 
   useEffect(() => {
     async function fetchProfile() {

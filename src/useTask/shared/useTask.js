@@ -47,7 +47,10 @@ export function useTask() {
         }
       });
     
-    return () => task.cancelled = true;
+    return () => {
+      task.cancel?.();
+      task.cancelled = true;
+    }
   }, [task]);
 
   const cancel = () => {

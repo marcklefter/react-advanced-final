@@ -1,6 +1,6 @@
 import {
-  ErrorHandler
-} from './ErrorHandler';
+  ErrorBoundary
+} from './ErrorBoundary';
 
 import {
   Profile,
@@ -11,7 +11,7 @@ import styles from './App.module.css';
 
 // ...
 
-// fallback component (required) for the top-level error boundary.
+// fallback component for the top-level error boundary.
 function AppFallback({ error, retry }) {
   return (
     <div>
@@ -26,14 +26,14 @@ export function App() {
   return (
     <div className={styles.app}>
       {/* Top-level error boundary. */}
-      <ErrorHandler id="root" Fallback={AppFallback}>
+      <ErrorBoundary Fallback={AppFallback}>
         <div className={styles.section}>
           <Profile />
         </div>
         <div className={styles.section}>
           <Content />
         </div>
-      </ErrorHandler>
+      </ErrorBoundary>
     </div>
   )
 }

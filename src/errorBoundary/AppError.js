@@ -1,7 +1,5 @@
 export class AppError extends Error {
-  constructor(message, boundaryId) {
+  constructor(message) {
     super(message);
-
-    this.boundaryId = boundaryId;
   }
 }

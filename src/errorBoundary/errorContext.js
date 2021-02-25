@@ -13,6 +13,6 @@ export function ErrorProvider({ value, children }) {
   )
 }
 
-export function useErrorHandler() {
+export function useError() {
   return useContext(ErrorContext);
 }

@@ -2,24 +2,22 @@ import React, {
   useState
 } from 'react';
 
-import {
-  Feed
-} from './Feed';
-
-// import {
-//   Search
-// } from './Search';
+import Feed from './Feed';
 
 import {
-  ErrorHandler
-} from '../ErrorHandler';
+  ErrorBoundary
+} from '../ErrorBoundary';
 
 // ...
-// To simulate failure while lazy-loading module:
-// 
-// const SearchComponent = React.lazy(() => import('./Search').then(() => new Promise.reject()));
+// Lazy-loaded component, with / without simulated error.
 
 const SearchComponent = React.lazy(() => import('./Search'));
+
+// const SearchComponent = React.lazy(() => {
+//   return Promise.reject(new Error('Failed to load Search component'));
+// });
+
+// ...
 
 function SearchFallback() {
   return 'Could not load Search';
@@ -27,11 +25,11 @@ function SearchFallback() {
 
 function Search() {
   return (
-    <ErrorHandler Fallback={SearchFallback}>
+    <ErrorBoundary Fallback={SearchFallback}>
       <React.Suspense fallback={'Loading Search...'}>
         <SearchComponent />
       </React.Suspense>
-    </ErrorHandler>
+    </ErrorBoundary>
   )
 }
 

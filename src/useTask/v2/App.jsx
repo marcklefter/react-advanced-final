@@ -6,7 +6,10 @@ import {
 import _ from 'lodash';
 
 import {
-  fetchUser
+  fetchUser,
+  
+  // use this function if implementing optional request cancellation exercise.
+  fetchUserCancellable
 } from '../shared/util';
 
 import {
@@ -25,6 +28,21 @@ const inputStyle = {
 };
 
 // ...
+// Alternative to memoization with useMemo, by lifting the debounced function outside the component.
+//
+// Comment out the memoized debounceTask in the App component; invoke this version in the handleChange event handler as follows:
+//
+// debounceTask(run, userId);
+
+// const debounceTask = _.debounce(
+//   (run, userId) => {
+//     console.log('Extracted debounceTask')
+//     run(fetchUser(userId));
+//   },
+//   1000
+// );
+
+// ...
 
 export function App() {
   const [userId, setUserId] = useState(1);
@@ -39,7 +57,7 @@ export function App() {
   const debounceTask = useMemo(
     () => _.debounce(
       userId => {
-        run(fetchUser(userId));
+        run(fetchUserCancellable(userId, 1000));
       }, 
       1000
     ),

@@ -6,7 +6,7 @@ import {
 
 // ...
 
-export class ErrorHandler extends React.Component {
+export class ErrorBoundary extends React.Component {
   state = {
     error: null
   };
@@ -54,13 +54,8 @@ export class ErrorHandler extends React.Component {
 
     if (error) {
       const {
-        id,
         Fallback
       } = this.props;
-      
-      if (error.boundaryId && error.boundaryId !== id) {
-        throw error;
-      }
 
       return <Fallback error={error} retry={this.retry} />
     }

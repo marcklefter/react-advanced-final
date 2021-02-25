@@ -3,11 +3,11 @@ import {
 } from '../AppError';
 
 import {
-  ErrorHandler
-} from '../ErrorHandler';
+  ErrorBoundary
+} from '../ErrorBoundary';
 
 import {
-  useErrorHandler
+  useError
 } from '../errorContext';
 
 import FeedItem from './FeedItem';
@@ -41,28 +41,10 @@ function FeedItemFallback() {
   )
 }
 
-export function Feed() {
-  const {
-    trace
-  } = useErrorHandler();
-
-  const onRefresh = () => {
-    try {
-      throw new AppError('Could not refresh feed');
-    } catch (error) {
-      trace(error);
-    }
-  }
-
-  return (
-    <>
-      <button onClick={onRefresh}>Refresh</button>
-
-      {items.map((item, i) => (
-        <ErrorHandler key={i} Fallback={FeedItemFallback}>
-          <FeedItem {...item} />
-        </ErrorHandler>
-      ))}
-    </>
-  )
+export default function Feed() {
+  return items.map((item, i) => (
+    <ErrorBoundary key={i} Fallback={FeedItemFallback}>
+      <FeedItem {...item} />
+    </ErrorBoundary>
+  ))
 }
