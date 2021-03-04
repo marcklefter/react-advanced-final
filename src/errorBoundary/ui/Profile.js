@@ -13,6 +13,33 @@ import {
   useError
 } from '../errorContext';
 
+// ...
+// A Button component featuring built-in error handling. 
+//
+// Instead of handling errors _inside_ an event handler for the onClick event, simply pass the handler as a prop to
+// this component:
+//
+// const onEditDetails = () => {
+//  // simulate an application error.
+//  throw new AppError('Cannot edit user details');
+// }
+// 
+// <Button onClick={onEditDetails}>Edit Details</Button>
+
+// function Button({ onClick, children }) {
+//   const { capture } = useError();
+// 
+//   const handler = e => {
+//     try {
+//       onClick(e);
+//     } catch (error) {
+//       capture(error);
+//     }
+//   }
+//    
+//   return <button onClick={handler}>{children}</button>
+// }
+
 export function Profile() {
   const [profile, setProfile] = useState(null);
 
@@ -35,6 +62,8 @@ export function Profile() {
     fetchProfile();
   }, [capture]);
 
+  // ...
+  // Trace an error occurring in an event handler.
   const onEditDetails = () => {
     try {
       throw new AppError('Could not edit user details');
@@ -60,6 +89,7 @@ export function Profile() {
       <div style={{ marginBottom: 50 }}>
         <img src={picture.large} alt="" />
       </div>
+      
       <button onClick={onEditDetails}>Edit Details</button>
     </>
   )

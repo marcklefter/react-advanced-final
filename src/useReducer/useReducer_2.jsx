@@ -12,7 +12,7 @@ function Counter() {
             incBy: state.incBy
           };
 
-        case 'INCREMENT':
+        case 'CHANGE':
           return {
             count: state.count,
             incBy: action.incBy
@@ -47,7 +47,7 @@ function Counter() {
         type="number"
         value={state.incBy}
         onChange={e => dispatch({
-          type: 'INCREMENT',
+          type: 'CHANGE',
           incBy: +e.target.value
         })}
       />
