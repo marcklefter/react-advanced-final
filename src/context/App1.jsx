@@ -21,12 +21,12 @@ function AppProvider({ children }) {
   const [login, setLogin] = useState(false);
   const [theme, setTheme] = useState(theme1);
 
-  const {
+  const value = {
     login, 
     setLogin,
     theme,
     setTheme
-  } = appState;
+  };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>
 }
