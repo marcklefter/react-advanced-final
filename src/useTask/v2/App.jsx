@@ -7,9 +7,9 @@ import _ from 'lodash';
 
 import {
   fetchUser,
-  
+
   // use this function if implementing optional request cancellation exercise.
-  fetchUserCancellable
+  // fetchUserCancellable
 } from '../shared/util';
 
 import {
@@ -37,7 +37,7 @@ const inputStyle = {
 // const debounceTask = _.debounce(
 //   (run, userId) => {
 //     console.log('Extracted debounceTask')
-//     run(fetchUser(userId));
+//     run(fetchUser(userId, 1000));
 //   },
 //   1000
 // );
@@ -57,7 +57,7 @@ export function App() {
   const debounceTask = useMemo(
     () => _.debounce(
       userId => {
-        run(fetchUserCancellable(userId, 1000));
+        run(fetchUser(userId, 1000));
       }, 
       1000
     ),
